@@ -45,9 +45,27 @@ const updateTask = (req, res) => {
     });
   }
 };
+const deleteTask = (req, res) => {
+  try {
+    const deletedTask = taskService.deleteTask(req.params.id);
+
+    if (!deletedTask) {
+      return res.status(404).json({
+        message: "Task not found",
+      });
+    }
+    res.json(deletedTask);
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   getAllTasks,
   getTaskById,
   createTask,
   updateTask,
+  deleteTask,
 };

@@ -75,9 +75,19 @@ const updateTask = (id, data) => {
   }
   return task;
 };
+const deleteTask = (id) => {
+  const index = tasks.findIndex((task) => task.id === Number(id));
+  if (index === -1) {
+    return undefined;
+  }
+  const deletedTask = tasks.splice(index, 1);
+  return deletedTask[0];
+};
+
 module.exports = {
   getAllTasks,
   getTaskById,
   createTask,
   updateTask,
+  deleteTask,
 };
