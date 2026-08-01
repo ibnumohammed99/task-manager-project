@@ -47,9 +47,37 @@ const createTask = (data) => {
   // Return the new task
   return newTask;
 };
+const updateTask = (id, data) => {
+  const task = tasks.find((task) => task.id === Number(id));
+  if (!task) {
+    return undefined;
+  }
 
+  if (data.title !== undefined) {
+    if (!data.title || data.title.trim() === "") {
+      throw new Error("Title is required");
+    }
+
+    task.title = data.title.trim();
+  }
+  if (data.completed !== undefined) {
+    if (typeof data.completed !== "boolean") {
+      throw new Error("Completed must be a boolean");
+    }
+    task.completed = data.completed;
+  }
+  if (data.priority !== undefined) {
+    const validPriorities = ["low", "medium", "high"];
+    if (!validPriorities.includes(data.priority)) {
+      throw new Error("Priority must be low, medium, or high");
+    }
+    task.priority = data.priority;
+  }
+  return task;
+};
 module.exports = {
   getAllTasks,
   getTaskById,
   createTask,
+  updateTask,
 };

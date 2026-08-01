@@ -29,9 +29,25 @@ const createTask = (req, res) => {
     });
   }
 };
+const updateTask = (req, res) => {
+  try {
+    const updatedTask = taskService.updateTask(req.params.id, req.body);
 
+    if (!updatedTask) {
+      return res.status(404).json({
+        message: "Task not found",
+      });
+    }
+    res.json(updatedTask);
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};
 module.exports = {
   getAllTasks,
   getTaskById,
   createTask,
+  updateTask,
 };
