@@ -18,7 +18,20 @@ const getTaskById = (req, res) => {
   res.json(task);
 };
 
+const createTask = (req, res) => {
+  try {
+    const newTask = taskService.createTask(req.body);
+
+    res.status(201).json(newTask);
+  } catch (error) {
+    res.status(400).json({
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   getAllTasks,
   getTaskById,
+  createTask,
 };
