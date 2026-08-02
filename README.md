@@ -1,4 +1,4 @@
-# 🧩 TaskNest — Task Manager
+# 🧩 🗂️ Task Manager — REST API
 
 > A full-stack task management application for creating, organizing, prioritizing, and tracking daily tasks.
 
@@ -104,6 +104,18 @@ task-manager-api/
 | POST   | `/api/tasks`     | Create a task    |
 | PATCH  | `/api/tasks/:id` | Update a task    |
 | DELETE | `/api/tasks/:id` | Delete a task    |
+
+---
+
+## 📸 Screenshots
+
+### Desktop
+
+![Task Manager Desktop](./screenshots/task-manager-desktop.png)
+
+### Mobile
+
+![Task Manager Mobile](./screenshots/task-manager-mobile.png)
 
 ---
 
