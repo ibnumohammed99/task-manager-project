@@ -636,12 +636,29 @@ select:focus {
   gap: 8px;
 }
 
+/*
+  IMPORTANT:
+  The grid is on .task-item itself.
+
+  This guarantees that:
+  - title can be any length
+  - priority always stays in the same column
+  - status always stays in the same column
+  - actions always stay in the same column
+*/
+
 .task-item {
-  display: flex;
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    90px
+    90px
+    120px;
 
   align-items: center;
 
-  gap: 14px;
+  column-gap: 14px;
 
   min-height: 72px;
 
@@ -662,6 +679,239 @@ select:focus {
   border-color: #d3d4dd;
 
   box-shadow: var(--shadow-sm);
+}
+
+/* ========================================
+   TASK TITLE
+======================================== */
+
+.task-title {
+  min-width: 0;
+
+  width: 100%;
+
+  overflow: hidden;
+}
+
+.task-title h3 {
+  margin: 0;
+
+  min-width: 0;
+
+  width: 100%;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  color: var(--text);
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+/* ========================================
+   PRIORITY COLUMN
+======================================== */
+
+.task-priority {
+  width: 90px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+/* ========================================
+   PRIORITY BADGES
+======================================== */
+
+.priority {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  width: 70px;
+
+  height: 27px;
+
+  padding: 0 10px;
+
+  border-radius: 20px;
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  text-transform: capitalize;
+
+  white-space: nowrap;
+}
+
+.priority-high {
+  color: var(--danger);
+
+  background: var(--danger-light);
+}
+
+.priority-medium {
+  color: var(--warning);
+
+  background: var(--warning-light);
+}
+
+.priority-low {
+  color: var(--success);
+
+  background: var(--success-light);
+}
+
+/* ========================================
+   STATUS COLUMN
+======================================== */
+
+.task-status {
+  width: 90px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  color: var(--text-secondary);
+
+  white-space: nowrap;
+}
+
+.status-active {
+  color: var(--primary);
+}
+
+.status-completed {
+  color: var(--success);
+}
+
+/* ========================================
+   TASK ACTIONS COLUMN
+======================================== */
+
+.task-actions {
+  width: 120px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: flex-end;
+
+  gap: 6px;
+}
+
+/* ========================================
+   ACTION BUTTONS
+======================================== */
+
+.task-action-btn {
+  width: 32px;
+
+  height: 32px;
+
+  flex-shrink: 0;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 0;
+
+  border: 1px solid var(--border);
+
+  border-radius: 8px;
+
+  background: var(--surface);
+
+  color: var(--text-secondary);
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.15s ease;
+}
+
+.task-action-btn:hover {
+  transform: translateY(-1px);
+
+  box-shadow: var(--shadow-sm);
+}
+
+.task-action-btn:active {
+  transform: translateY(0);
+}
+
+/* ---------- Complete ---------- */
+
+.complete-btn:hover {
+  color: var(--success);
+
+  border-color: var(--success);
+
+  background: var(--success-light);
+}
+
+/* ---------- Edit ---------- */
+
+.edit-btn:hover {
+  color: var(--primary);
+
+  border-color: var(--primary);
+
+  background: var(--primary-light);
+}
+
+/* ---------- Delete ---------- */
+
+.delete-btn:hover {
+  color: var(--danger);
+
+  border-color: var(--danger);
+
+  background: var(--danger-light);
+}
+
+/* ========================================
+   COMPLETED TASK
+======================================== */
+
+.task-item.completed {
+  opacity: 0.7;
+}
+
+.task-item.completed .task-title h3 {
+  text-decoration: line-through;
+
+  color: var(--text-secondary);
 }
 
 /* ========================================
@@ -725,9 +975,19 @@ select:focus {
   #clear-filters-btn {
     width: fit-content;
   }
+
+  .task-item {
+    grid-template-columns:
+      minmax(0, 1fr)
+      90px
+      90px
+      120px;
+  }
 }
 
-/* ---------- Tablet ---------- */
+/* ========================================
+   TABLET
+======================================== */
 
 @media (max-width: 800px) {
   .app {
@@ -736,14 +996,17 @@ select:focus {
 
   .sidebar {
     width: 100%;
+
     min-width: 0;
 
     height: auto;
+
     min-height: auto;
 
     position: static;
 
     padding: 18px;
+
     overflow: visible;
   }
 
@@ -779,9 +1042,43 @@ select:focus {
   #add-task-btn {
     grid-column: auto;
   }
+
+  /* Tablet task card */
+
+  .task-item {
+    grid-template-columns:
+      minmax(0, 1fr)
+      80px
+      80px
+      105px;
+
+    column-gap: 10px;
+  }
+
+  .task-priority {
+    width: 80px;
+  }
+
+  .task-status {
+    width: 80px;
+  }
+
+  .task-actions {
+    width: 105px;
+
+    gap: 4px;
+  }
+
+  .task-action-btn {
+    width: 30px;
+
+    height: 30px;
+  }
 }
 
-/* ---------- Mobile ---------- */
+/* ========================================
+   MOBILE
+======================================== */
 
 @media (max-width: 520px) {
   .main-header {
@@ -820,5 +1117,55 @@ select:focus {
 
   .sort-group select {
     flex: 1;
+  }
+
+  /*
+    On small screens we stack the card
+    because there isn't enough horizontal
+    space for four fixed columns.
+  */
+
+  .task-item {
+    grid-template-columns: 1fr;
+
+    align-items: stretch;
+
+    gap: 10px;
+
+    padding: 13px;
+  }
+
+  .task-title {
+    width: 100%;
+  }
+
+  .task-title h3 {
+    white-space: normal;
+
+    overflow: visible;
+
+    text-overflow: unset;
+
+    line-height: 1.4;
+  }
+
+  .task-priority {
+    width: 100%;
+
+    justify-content: flex-start;
+  }
+
+  .task-status {
+    width: 100%;
+
+    justify-content: flex-start;
+  }
+
+  .task-actions {
+    width: 100%;
+
+    justify-content: flex-start;
+
+    gap: 6px;
   }
 }
