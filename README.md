@@ -4,11 +4,23 @@
 
 ---
 
+## 🌐 Live Demo
+
+**Frontend:**  
+https://task-manager-project-1-lab0.onrender.com
+
+**Backend API:**  
+https://task-manager-project-4440.onrender.com
+
+---
+
 ## 📖 About The Project
 
 TaskNest is a full-stack Task Manager application built with **Node.js and Express.js**.
 
 The project demonstrates a RESTful API using **MVC architecture**, environment configuration, validation, error handling, and a responsive frontend connected to the backend.
+
+The application is deployed online using **Render**, with the frontend hosted as a Static Site and the backend deployed as a Web Service.
 
 ### Architecture
 
@@ -63,6 +75,7 @@ Data
 - dotenv
 - CORS
 - REST API testing tools
+- Render
 
 ---
 
@@ -85,12 +98,19 @@ task-manager-api/
 │   └── data/
 │       └── taskData.js
 │
-└── frontend/
-    ├── index.html
-    ├── css/
-    │   └── style.css
-    └── js/
-        └── app.js
+├── frontend/
+│   ├── index.html
+│   ├── css/
+│   │   └── style.css
+│   └── js/
+│       └── app.js
+│
+├── screenshots/
+│
+├── package.json
+├── package-lock.json
+├── .gitignore
+└── README.md
 ```
 
 ---
@@ -121,27 +141,34 @@ task-manager-api/
 
 ## ⚙️ Installation
 
-Clone the repository:
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/ibnumohammed99/task-manager-project.git
 ```
 
-Install dependencies:
+### 2. Navigate to the project
 
 ```bash
 cd task-manager-api
+```
+
+### 3. Install dependencies
+
+```bash
 npm install
 ```
 
-Create `backend/.env`:
+### 4. Create environment variables
+
+Create a `.env` file inside the `backend` directory:
 
 ```env
 PORT=3000
 APP_NAME=Task Manager API
 ```
 
-Start the development server:
+### 5. Start the development server
 
 ```bash
 npm run dev
@@ -166,18 +193,56 @@ Then open the local frontend URL provided in the terminal.
 
 ---
 
-## 🌐 Frontend
+## 🌐 Deployment
 
-The frontend connects to the REST API and provides a dashboard for managing tasks, including searching, filtering, sorting, editing, completing, and deleting tasks.
+The project is deployed using **Render**.
+
+### Backend
+
+The Express.js REST API is deployed as a **Render Web Service**.
+
+**Live API:**
+
+https://task-manager-project-4440.onrender.com
+
+### Frontend
+
+The HTML/CSS/JavaScript frontend is deployed as a **Render Static Site**.
+
+**Live Application:**
+
+https://task-manager-project-1-lab0.onrender.com
+
+The deployed frontend communicates with the deployed backend through the REST API.
+
+---
+
+## 🔐 Environment Variables
+
+The backend uses environment variables for configuration.
+
+Example:
+
+```env
+PORT=3000
+APP_NAME=Task Manager API
+```
+
+The `.env` file is used locally and should **not be committed to GitHub**.
+
+In production, environment variables are configured through the Render dashboard.
 
 ---
 
 ## 🔮 Future Improvements
 
 - Add database persistence
-- Add user authentication
+- Add user authentication and authorization
 - Add task due dates and reminders
-- Deploy the application online
+- Add pagination
+- Add task categories and tags
+- Add automated testing
+- Improve API documentation with Swagger/OpenAPI
 
 ---
 
